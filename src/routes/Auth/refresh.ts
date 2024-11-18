@@ -1,5 +1,5 @@
 import fs from "fs/promises"
-import { Context } from "hono"
+import type { Context } from "hono"
 import path from "path"
 import { User } from "../../models/user"
 
@@ -45,7 +45,7 @@ const refresh = async (c: Context) => {
 
 		try {
 			const oldAvatarPath = await fs.readdir(avatarsDir)
-			const oldAvatar = oldAvatarPath.find((file) => file.startsWith(userId.toString()))
+			const oldAvatar = oldAvatarPath.find((file) => file.startsWith(userId!.toString()))
 			if (oldAvatar) {
 				await fs.unlink(path.join(avatarsDir, oldAvatar))
 			}
